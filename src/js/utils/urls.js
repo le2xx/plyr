@@ -10,6 +10,10 @@ import is from './is';
  * @param {Boolean} safe - failsafe parsing
  */
 export function parseUrl(input, safe = true) {
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
+    return null;
+  }
+
   let url = input;
 
   if (safe) {

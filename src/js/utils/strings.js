@@ -63,6 +63,9 @@ export function toCamelCase(input = '') {
 
 // Remove HTML from a string
 export function stripHTML(source) {
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
+    return null;
+  }
   const fragment = document.createDocumentFragment();
   const element = document.createElement('div');
   fragment.appendChild(element);

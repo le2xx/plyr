@@ -84,6 +84,10 @@ export function getAspectRatio(input) {
 
 // Set aspect ratio for responsive container
 export function setAspectRatio(input) {
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
+    return null;
+  }
+
   if (!this.isVideo) {
     return {};
   }
@@ -139,6 +143,9 @@ export function roundAspectRatio(x, y, tolerance = 0.05) {
 // Get the size of the viewport
 // https://stackoverflow.com/questions/1248081/how-to-get-the-browser-viewport-dimensions
 export function getViewportSize() {
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
+    return null;
+  }
   const width = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
   const height = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
   return [width, height];

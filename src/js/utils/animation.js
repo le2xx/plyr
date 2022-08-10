@@ -5,7 +5,7 @@
 import is from './is';
 
 export const transitionEndEvent = (() => {
-  if (typeof document === 'undefined') {
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
     return false;
   }
 

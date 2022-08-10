@@ -16,6 +16,9 @@ import sources from './sources';
 import toggleClass from './toggle-class';
 
 (() => {
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
+    return;
+  }
   const production = 'plyr.io';
   const isProduction = window.location.host.includes(production);
 

@@ -37,6 +37,9 @@ import { formatTime, getHours } from './utils/time';
 const controls = {
   // Get icon URL
   getIconUrl() {
+    if (typeof document === 'undefined' || typeof window === 'undefined') {
+      return {};
+    }
     const url = new URL(this.config.iconUrl, window.location);
     const host = window.location.host ? window.location.host : window.top.location.host;
     const cors = url.host !== host || (browser.isIE && !window.svg4everybody);
@@ -102,6 +105,9 @@ const controls = {
 
   // Create <svg> icon
   createIcon(type, attributes) {
+    if (typeof document === 'undefined' || typeof window === 'undefined') {
+      return null;
+    }
     const namespace = 'http://www.w3.org/2000/svg';
     const iconUrl = controls.getIconUrl.call(this);
     const iconPath = `${!iconUrl.cors ? iconUrl.url : ''}#${this.config.iconPrefix}`;
@@ -1619,6 +1625,9 @@ const controls = {
 
   // Insert controls
   inject() {
+    if (typeof document === 'undefined' || typeof window === 'undefined') {
+      return false;
+    }
     // Sprite
     if (this.config.loadSprite) {
       const icon = controls.getIconUrl.call(this);
@@ -1759,6 +1768,9 @@ const controls = {
   // Set media metadata
   setMediaMetadata() {
     try {
+      if (typeof document === 'undefined' || typeof window === 'undefined') {
+        return;
+      }
       if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new window.MediaMetadata({
           title: this.config.mediaMetadata.title,
@@ -1774,8 +1786,11 @@ const controls = {
 
   // Add markers
   setMarkers() {
-    if (!this.duration || this.elements.markers) return;
+    if (typeof document === 'undefined' || typeof window === 'undefined') {
+      return;
+    }
 
+    if (!this.duration || this.elements.markers) return;
     // Get valid points
     const points = this.config.markers?.points?.filter(({ time }) => time > 0 && time < this.duration);
     if (!points?.length) return;

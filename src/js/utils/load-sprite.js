@@ -8,6 +8,10 @@ import is from './is';
 
 // Load an external SVG sprite
 export default function loadSprite(url, id) {
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
+    return;
+  }
+
   if (!is.string(url)) {
     return;
   }
