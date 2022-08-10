@@ -5,7 +5,10 @@
 import is from './is';
 
 export const transitionEndEvent = (() => {
-  if (!document) { return; }
+  if (typeof document === 'undefined') {
+    return false;
+  }
+
   const element = document.createElement('span');
 
   const events = {
